@@ -1,12 +1,16 @@
-import { useGetAllCatsQuery } from '@/api/services/packagesApi'
-import React from 'react'
-/** @format */
-const search = () => {
-  const data = useGetAllCatsQuery()
-  console.log(data)
-  return (
-    <div>search</div>
-  )
-}
+import { useGetAllCatsQuery } from "@/api/services/packagesApi";
+import FormSearch from "@/components/search/formSearch";
+import React from "react";
 
-export default search
+const search = () => {
+  const allCats = useGetAllCatsQuery();
+  console.log(allCats);
+  return (
+    <div>
+
+      <FormSearch allCats={allCats} />
+    </div>
+  );
+};
+
+export default search;
