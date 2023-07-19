@@ -11,7 +11,6 @@ export default function Document() {
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#077b7a" />
-        <meta name="description" content="مشنص للعقارات" />
       </Head>
       <body>
         <Main />

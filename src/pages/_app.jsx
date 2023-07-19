@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Noto_Sans_Arabic } from "next/font/google";
+import { Provider } from "react-redux";
+
 //custom
 //style
 import Head from "next/head";
+import store from "@/api/store";
 
 const font = Noto_Sans_Arabic({
   style: ["normal"],
@@ -13,7 +16,7 @@ const font = Noto_Sans_Arabic({
 export default function App({ Component, pageProps }) {
 
   return (
-    <>
+    <Provider store={store}>
       <Head>
         <meta
           name="viewport"
@@ -26,7 +29,6 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </div>
       </main>
-
-    </>
+      </Provider>
   );
 }
