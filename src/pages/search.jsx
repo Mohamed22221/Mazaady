@@ -6,7 +6,6 @@ import React, { useState } from "react";
 const search = () => {
   const allCats = useGetAllCatsQuery();
   const [dataForm, setDataForm] = useState({});
-  console.log(dataForm.other)
   return (
     <div>
       <FormSearch allCats={allCats} setDataForm={setDataForm} />
