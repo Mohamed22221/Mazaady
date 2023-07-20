@@ -4,10 +4,9 @@ import React from "react";
 
 const search = () => {
   const allCats = useGetAllCatsQuery();
-  console.log(allCats.data , "allCats");
+ 
   return (
     <div>
-
       <FormSearch allCats={allCats} />
     </div>
   );

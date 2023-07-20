@@ -9,21 +9,21 @@ export const packagesApi = wrapperAPI.injectEndpoints({
       query: () => ({
         url: `get_all_cats`,
         method: "GET",
-      })
+      }),
     }),
-    getDetailsPackages: builder.query({
+    getPropertiesCats: builder.query({
       providesTags: ["Packages"],
-      query: (id) => `planTypes/show/${id}`,
+      query: (id) => `properties?cat=${id}`,
     }),
-  
+    getOptionsCats: builder.query({
+      providesTags: ["Packages"],
+      query: (id) => `get-options-child/${id}`,
+    }),
   }),
-  
 });
 
 export const {
   useGetAllCatsQuery,
-  useGetDetailsPackagesQuery,
-
-
-
+  useGetPropertiesCatsQuery,
+  useGetOptionsCatsQuery,
 } = packagesApi;
