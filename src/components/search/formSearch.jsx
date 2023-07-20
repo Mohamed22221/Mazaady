@@ -128,7 +128,11 @@ const FormSearch = ({ allCats, setDataForm }) => {
             </div>
           )}
           {/*obtions select */}
-          {formik.values.properties != "" && (
+          {formik.values.properties === "" ? (
+            ""
+          ) : formik.values.properties === "other" ? (
+            ""
+          ) : (
             <Field name="type" as="select">
               {(props) => {
                 const { field, form } = props;
@@ -160,7 +164,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
           {formik.values.type != "" && (
             <Field name="option" as="select">
               {(props) => {
-                const { form ,field } = props;
+                const { form, field } = props;
                 const idOptions = formik.values.type;
                 const dataOptions = useGetOptionsCatsQuery(idOptions);
                 const getOption = dataOptions?.data?.data;
@@ -170,10 +174,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                       return (
                         <div key={item.id}>
                           <label>{item?.name}</label>
-                          <SelectSearch
-                            name={field.name}
-                            formHandler={form}
-                          >
+                          <SelectSearch name={field.name} formHandler={form}>
                             {item?.options?.map((details) => {
                               return (
                                 <Option key={details.id} value={details.id}>

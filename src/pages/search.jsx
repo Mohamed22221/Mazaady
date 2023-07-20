@@ -5,11 +5,14 @@ import React, { useState } from "react";
 
 const search = () => {
   const allCats = useGetAllCatsQuery();
-  const [dataForm , setDataForm] = useState({})
+  const [dataForm, setDataForm] = useState({});
+  console.log(dataForm.other)
   return (
     <div>
       <FormSearch allCats={allCats} setDataForm={setDataForm} />
-      <TabelSearch dataForm={dataForm} allCats={allCats?.data} />
+      {Object.keys(dataForm).length > 0 && (
+        <TabelSearch dataForm={dataForm} allCats={allCats?.data} />
+      )}
     </div>
   );
 };
