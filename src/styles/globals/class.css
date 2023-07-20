@@ -1,0 +1,6 @@
+@layer {
+  .backy {
+    background: transparent linear-gradient(90deg, #d20653 0%, #9b0257 100%) 0%
+      0% no-repeat padding-box;
+  }
+}

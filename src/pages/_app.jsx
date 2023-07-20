@@ -1,10 +1,10 @@
 import { Provider } from "react-redux";
 import "tailwindcss/tailwind.css";
-import "../styles/globals.css";
-
+import "../../src/styles/globals/globals.css";
 import Head from "next/head";
 import store from "@/api/store";
 import TopSearch from "@/components/home/search";
+import Navbar from "@/components/home/navbar/navBar";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -16,9 +16,10 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
 
-      <main className="container mx-auto">
+      <main>
         <div>
           <TopSearch />
+          <Navbar />
           <Component {...pageProps} />
         </div>
       </main>
