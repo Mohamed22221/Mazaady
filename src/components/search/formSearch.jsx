@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Formik, Field, ErrorMessage, FieldArray } from "formik";
 import { object, string } from "yup";
 import { Select } from "antd";
@@ -11,9 +11,9 @@ import {
 import TextError from "../shared/TextError";
 import SelectSearch from "../shared/SelectSearch";
 
-const FormSearch = ({ allCats }) => {
+const FormSearch = ({ allCats, setDataForm }) => {
   const { Option } = Select;
-  //start values filter search 
+  //start values filter search
   const initialValues = {
     categorys: "",
     sub_category: "",
@@ -22,9 +22,10 @@ const FormSearch = ({ allCats }) => {
     type: "",
     option: "",
   };
-  //handel filter search 
+  console.log(initialValues);
+  //handel filter search
   const onSubmit = (data, actions) => {
-    console.log(data);
+    setDataForm(data);
     actions.resetForm({ data: "" });
   };
   //handel validation error
@@ -68,6 +69,7 @@ const FormSearch = ({ allCats }) => {
             {(props) => {
               const { field, form } = props;
               const dataCategories = allCats?.data?.data?.categories;
+              console.log(formik, "formik.values");
               return (
                 <div>
                   <label> Sub Category</label>
@@ -158,17 +160,20 @@ const FormSearch = ({ allCats }) => {
           {formik.values.type != "" && (
             <Field name="option" as="select">
               {(props) => {
-                const { field, form } = props;
+                const { form ,field } = props;
                 const idOptions = formik.values.type;
                 const dataOptions = useGetOptionsCatsQuery(idOptions);
                 const getOption = dataOptions?.data?.data;
                 return (
                   <>
-                    {getOption?.map((item) => {
+                    {getOption?.map((item, index) => {
                       return (
                         <div key={item.id}>
                           <label>{item?.name}</label>
-                          <SelectSearch name={field.name} formHandler={form}>
+                          <SelectSearch
+                            name={field.name}
+                            formHandler={form}
+                          >
                             {item?.options?.map((details) => {
                               return (
                                 <Option key={details.id} value={details.id}>

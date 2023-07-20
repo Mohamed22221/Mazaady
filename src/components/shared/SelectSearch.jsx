@@ -7,6 +7,7 @@ const SelectSearch = ({name , children , formHandler}) => {
     <div>
       <Select
         showSearch
+        optionFilterProp="children"
         name={name}
         onChange={(value) => formHandler.setFieldValue(name, value)}
         onBlur={() => formHandler.setFieldTouched(name, true)}
