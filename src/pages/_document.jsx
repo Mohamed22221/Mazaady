@@ -19,7 +19,7 @@ export default function Document() {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#077b7a" />
       </Head>
-      <body>
+      <body dir="rtl">
         <Main />
         <NextScript />
       </body>

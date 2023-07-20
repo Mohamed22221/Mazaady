@@ -4,6 +4,7 @@ import "../styles/globals.css";
 
 import Head from "next/head";
 import store from "@/api/store";
+import TopSearch from "@/components/home/search";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,8 +16,9 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
 
-      <main>
-        <div className="main-margin">
+      <main className="container mx-auto">
+        <div>
+          <TopSearch />
           <Component {...pageProps} />
         </div>
       </main>

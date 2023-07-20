@@ -5,3 +5,19 @@ body {
     font-family: 'Tajawal', sans-serif;
     
 }
+.ant-btn {
+    width: 200px;
+    background-color: #d206541a;
+    color: #d20654;
+    font-weight: bold;
+    border-radius: 0px 5px 5px 0 !important;
+    border: none;
+    height: 1.75rem;
+}
+.ant-btn-default:hover , .ant-btn-default:focus{
+    color: #d20654 !important;
+}
+.ant-dropdown-open:hover{
+    background-color: #d206541a !important;
+    color: #d20654;
+}
