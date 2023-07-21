@@ -3,8 +3,8 @@ import "tailwindcss/tailwind.css";
 import "../../src/styles/globals/globals.css";
 import Head from "next/head";
 import store from "@/api/store";
-import TopSearch from "@/components/home/search";
-import Navbar from "@/components/home/navbar/navBar";
+import TopSearch from "@/components/layout/search";
+import Navbar from "@/components/layout/navbar/navBar";
 
 export default function App({ Component, pageProps }) {
   return (
