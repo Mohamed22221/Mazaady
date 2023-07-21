@@ -1,49 +1,56 @@
 .search-button .ant-btn {
-    width: 150px;
-    color: white;
-    font-weight: bold;
-    border: none;
-    height: 2.5rem;
-    background: transparent
-      radial-gradient(
-        closest-side at 50% 50%,
-        #fdbc01 0%,
-        #fdba03 31%,
-        #ff951d 100%
-      )
-      0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #00000029;
-    border-radius: 15px;
-    opacity: 1;
-    font-family: inherit;
-  }
-  .search-button .ant-btn-default:hover,
-  .search-button .ant-btn-default:focus {
-    color: white !important;
-  }
-  .search-button .ant-dropdown-open:hover {
-    background-color: #d206541a !important;
-    color: white;
-  }
+  width: 150px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  height: 2.5rem;
+  background: transparent
+    radial-gradient(
+      closest-side at 50% 50%,
+      #fdbc01 0%,
+      #fdba03 31%,
+      #ff951d 100%
+    )
+    0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 15px;
+  opacity: 1;
+  font-family: inherit;
+}
+.search-button .ant-btn-default:hover,
+.search-button .ant-btn-default:focus {
+  color: white !important;
+}
+.search-button .ant-dropdown-open:hover {
+  background-color: #d206541a !important;
+  color: white;
+}
 
-  
+.main-select-search .ant-btn {
+  width: 200px;
+  background-color: #d206541a !important;
+  color: #d20654;
+  font-weight: bold;
+  border-radius: 0px 5px 5px 0 !important;
+  border: none;
+  height: 2.5rem;
+  font-family: inherit;
+}
+
+.main-select-search .ant-btn-default:hover,
+.main-select-search .ant-btn-default:focus {
+  color: #d20654 !important;
+}
+.main-select-search .ant-dropdown-open:hover {
+  background-color: #d206541a !important;
+  color: #d20654;
+}
+@media (max-width: 767px) {
+  .search-button .ant-btn,
   .main-select-search .ant-btn {
-    width: 200px;
-    background-color: #d206541a !important;
-    color: #d20654;
-    font-weight: bold;
-    border-radius: 0px 5px 5px 0 !important;
-    border: none;
-    height: 2.50rem;
-    font-family: inherit;
-  
+    width: 120px;
   }
-  .main-select-search .ant-btn-default:hover,
-  .main-select-search .ant-btn-default:focus {
-    color: #d20654 !important;
+  .main-select-search .ant-space-item {
+    font-size: 11px !important;
   }
-  .main-select-search .ant-dropdown-open:hover {
-    background-color: #d206541a !important;
-    color: #d20654;
-  }
-  
+}

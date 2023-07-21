@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <filter id="Ellipse_277" x="0" y="0" width="40" height="40" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_5411" data-name="Group 5411" transform="translate(5 2)">
+    <g transform="matrix(1, 0, 0, 1, -5, -2)" filter="url(#Ellipse_277)">
+      <circle id="Ellipse_277-2" data-name="Ellipse 277" cx="11" cy="11" r="11" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <g id="noun_Love_1033573" transform="translate(9 10)">
+      <path id="Path_2496" data-name="Path 2496" d="M-935.6,961.337a3.2,3.2,0,0,0-2.267-.937,3.225,3.225,0,0,0-2.267.937l-.532.532-.532-.532a3.2,3.2,0,0,0-2.267-.937,3.263,3.263,0,0,0-3.115,2.343,2.966,2.966,0,0,0,.734,3l4.787,4.787a.528.528,0,0,0,.76,0l4.673-4.673A3.165,3.165,0,0,0-935.6,961.337Z" transform="translate(946.716 -960.4)" fill="#e3e3e3"/>
+    </g>
+  </g>
+</svg>

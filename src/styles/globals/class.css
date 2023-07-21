@@ -1,6 +1,35 @@
 @layer {
   .backy {
     background: transparent linear-gradient(90deg, #d20653 0%, #9b0257 100%) 0%
-      0% no-repeat padding-box;
+      0% no-repeat padding-box !important;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .grid-style {
+    display: grid;
+    grid-template-columns: 70% 26%;
+    gap: 0 15px;
+  }
+  @media (max-width: 767px) {
+    .grid-style {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px 0px;
+    }
+  }
+  .shadow-box {
+    box-shadow: 3px 5px 37px #00000017;
+  }
+  .bg-Filter {
+    background: #1d1d1d36 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 }

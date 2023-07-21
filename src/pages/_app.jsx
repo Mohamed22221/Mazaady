@@ -18,11 +18,12 @@ export default function App({ Component, pageProps }) {
 
       <main>
         <div>
-          {/* <TopSearch /> */}
+          <TopSearch />
           <Navbar />
           <Component {...pageProps} />
         </div>
       </main>
     </Provider>
+    
   );
 }

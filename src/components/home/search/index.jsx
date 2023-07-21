@@ -31,13 +31,13 @@ const TopSearch = () => {
     },
   ];
   return (
-    <div className="container mx-auto flex justify-between items-center py-5">
+    <div className="container max-md:px-2 mx-auto flex justify-between items-center py-5">
       <div className="flex items-center h-3">
         <DrobdownButton items={items} mainClass="main-select-search" />
         <SelectSearch />
       </div>
       <div>
-        <Image src={logo} alt="logo" />
+        <Image src={logo} alt="logo" className="mx-md:w-[70px]" />
       </div>
     </div>
   );

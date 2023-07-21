@@ -39,7 +39,7 @@ function Navbar() {
   console.log(navbar);
   return (
     <header className="z-50 backy relative ">
-      <div className="container px-2 h-16 mx-auto flex justify-between items-center ">
+      <div className="container max-md:px-2 h-16 mx-auto flex justify-between items-center ">
         <MenuFoldOutlined
           className="text-white flex md:hidden cursor-pointer text-xl"
           onClick={() => setNavbar(!navbar)}
@@ -48,7 +48,7 @@ function Navbar() {
           className={
             navbar === true
               ? "absolute top-[60px] left-0 right-0 backy"
-              : ` hidden md:flex`
+              : ` hidden md:flex sec1`
           }
         >
           <ul className="mx-5 md:flex md:items-center md:gap-[50px]">
