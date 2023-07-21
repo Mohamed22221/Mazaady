@@ -13,14 +13,14 @@ const RightSlider = ({ setCurrent }) => {
         <UpOutlined className=" cursor-pointer shadow-box p-1" />
       </Space>
 
-      <div className="h-[400px]  overflow-y-scroll relative no-scrollbar">
+      <div className=" max-sm:h-[300px] h-[400px]  overflow-y-scroll relative no-scrollbar">
         {SliderData.map((item, index) => {
           return (
             <div key={index}>
               <img
                 onClick={() => handelCurrent(item)}
                 src={item.image}
-                className="w-[90px] h-[78px] rounded-[5px] my-2 "
+                className="max-sm:h-[50px] max-sm:w-[70px] w-[90px] h-[78px] rounded-[5px] my-2 "
                 id="view"
               />
             </div>

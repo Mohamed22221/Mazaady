@@ -31,18 +31,27 @@ const AboutSlider = () => {
         </h3>
         <p className="text-grayColor">code 1234</p>
       </div>
-      <div className="flex items-center justify-between py-2 ">
-        <div className="flex items-center">
-            <p className="p-1 px-3 mx-1 bg-mainColor text-mainColor bg-opacity-10 rounded-[5px]">+10000</p>
-            <p className="p-1 px-3 mx-1 bg-mainColor text-mainColor bg-opacity-10 rounded-[5px]">+10000</p>
-            <p className="p-1 px-3 mx-1 bg-mainColor text-mainColor bg-opacity-10 rounded-[5px]">+10000</p>
-
+      <div className="lg:flex items-center justify-between py-2 ">
+        <div className="flex items-center py-1">
+          <p className="p-1 max-sm:px-1 max-sm:text-sm px-3 mx-1 bg-mainColor text-mainColor bg-opacity-10 rounded-[5px]">
+            +10000
+          </p>
+          <p className="p-1 max-sm:px-1 max-sm:text-sm px-3 mx-1 bg-mainColor text-mainColor bg-opacity-10 rounded-[5px]">
+            +10000
+          </p>
+          <p className="p-1 max-sm:px-1 max-sm:text-sm px-3 mx-1 bg-mainColor text-mainColor bg-opacity-10 rounded-[5px]">
+            +10000
+          </p>
         </div>
-        <div className="flex">
-            <input placeholder="اكتب المبلغ" className="border-2 px-2 py-1 mx-1 text-grayColor" />
-            <button className="py-1 px-4 backy text-white" >تأكيد</button>
+        <div className="flex py-1">
+          <input
+            placeholder="اكتب المبلغ"
+            className="max-md:w-[130px] max-lg:w-[140px] border-2 px-2 py-1 mx-1 text-grayColor"
+          />
+          <button className="max-md:px-3 py-1 px-4 backy text-white">
+            تأكيد
+          </button>
         </div>
-
       </div>
     </div>
   );
