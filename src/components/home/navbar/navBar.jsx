@@ -36,7 +36,6 @@ function Navbar() {
     },
   ];
   const [navbar, setNavbar] = useState(false);
-  console.log(navbar);
   return (
     <header className="z-50 backy relative ">
       <div className="container max-md:px-2 h-16 mx-auto flex justify-between items-center ">

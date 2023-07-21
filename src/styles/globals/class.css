@@ -12,7 +12,7 @@
   }
   .grid-style {
     display: grid;
-    grid-template-columns: 70% 26%;
+    grid-template-columns: 70% 29%;
     gap: 0 15px;
   }
   @media (max-width: 767px) {

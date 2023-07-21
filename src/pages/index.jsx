@@ -1,4 +1,5 @@
-import Gallery from "@/components/home/gallery/gallery";
+import AuctionPrice from "@/components/auction-price/auction-price";
+import Gallery from "@/components/home/gallery";
 import React from "react";
 
 const Home = () => {
@@ -7,7 +8,9 @@ const Home = () => {
       <div className="">
         <Gallery />
       </div>
-      <div className="flex flex-col">ssssssss</div>
+      <div className="">
+        <AuctionPrice />
+      </div>
     </div>
   );
 };

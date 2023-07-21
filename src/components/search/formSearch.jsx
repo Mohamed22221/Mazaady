@@ -22,7 +22,6 @@ const FormSearch = ({ allCats, setDataForm }) => {
     type: "",
     option: "",
   };
-  console.log(initialValues);
   //handel filter search
   const onSubmit = (data, actions) => {
     setDataForm(data);
@@ -69,7 +68,6 @@ const FormSearch = ({ allCats, setDataForm }) => {
             {(props) => {
               const { field, form } = props;
               const dataCategories = allCats?.data?.data?.categories;
-              console.log(formik, "formik.values");
               return (
                 <div>
                   <label> Sub Category</label>

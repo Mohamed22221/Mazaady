@@ -10,18 +10,18 @@ const AboutSlider = () => {
     <div className="p-2">
       {/*details person */}
       <div className="flex items-center relative">
-        <Image src={person} className="w-[44px] h-[44px] rounded-3xl " />
-        <Image src={heart} className="absolute right-4 top-5" />
+        <Image src={person} alt="person" className="w-[44px] h-[44px] rounded-3xl " />
+        <Image src={heart} alt="heart" className="absolute right-4 top-5" />
         <div className="mx-3">
           <p className="text-moveColor font-bold text-[14px] ">اسم البائع</p>
           <p className="text-moveColor font-bold text-[14px] ">01116798122</p>
         </div>
         <div className="flex items-center ">
           <Image src={starLight} alt="starLight" />
-          <Image src={starGold} alt="starGold" />
-          <Image src={starGold} alt="starGold" />
-          <Image src={starGold} alt="starGold" />
-          <Image src={starGold} alt="starGold" />
+          <Image src={starGold} alt="starGold1" />
+          <Image src={starGold} alt="starGold2" />
+          <Image src={starGold} alt="starGold3" />
+          <Image src={starGold} alt="starGold4" />
         </div>
       </div>
       {/*details person */}

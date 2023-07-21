@@ -20,8 +20,8 @@ const RightSlider = ({ setCurrent }) => {
               <img
                 onClick={() => handelCurrent(item)}
                 src={item.image}
-                className="max-sm:h-[50px] max-sm:w-[70px] w-[90px] h-[78px] rounded-[5px] my-2 "
-                id="view"
+                alt="slider"
+                className="max-sm:h-[50px] max-sm:w-[70px] w-[90px] h-[78px] rounded-[5px] my-2 cursor-pointer "
               />
             </div>
           );
