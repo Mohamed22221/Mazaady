@@ -7,13 +7,26 @@ const RightSlider = ({ setCurrent }) => {
   const handelCurrent = (item) => {
     setCurrent(item);
   };
+  const scrollButtom = () => {
+    document.getElementById("scroll").scrollTop += 100;
+  };
+  const scrollTop = () => {
+    document.getElementById("scroll").scrollTop -= 100;
+  };
+
   return (
     <div className="flex flex-col items-center">
       <Space>
-        <UpOutlined className=" cursor-pointer shadow-box p-1" />
+        <UpOutlined
+          className=" cursor-pointer shadow-box p-1 my-2"
+          onClick={scrollTop}
+        />
       </Space>
 
-      <div className=" max-sm:h-[300px] h-[400px]  overflow-y-scroll relative no-scrollbar">
+      <div
+        className=" max-sm:h-[300px] h-[400px]  overflow-y-scroll relative no-scrollbar"
+        id="scroll"
+      >
         {SliderData.map((item, index) => {
           return (
             <div key={index}>
@@ -21,7 +34,7 @@ const RightSlider = ({ setCurrent }) => {
                 onClick={() => handelCurrent(item)}
                 src={item.image}
                 alt="slider"
-                className="max-sm:h-[50px] max-sm:w-[70px] w-[90px] h-[78px] rounded-[5px] my-2 cursor-pointer "
+                className="scroll max-sm:h-[50px] max-sm:w-[70px] w-[90px] h-[78px] rounded-[5px] my-2 cursor-pointer "
               />
             </div>
           );
@@ -29,7 +42,10 @@ const RightSlider = ({ setCurrent }) => {
       </div>
       <Space>
         {" "}
-        <DownOutlined className="cursor-pointer shadow-box p-1" />
+        <DownOutlined
+          className="cursor-pointer shadow-box p-1 my-2"
+          onClick={scrollButtom}
+        />
       </Space>
     </div>
   );

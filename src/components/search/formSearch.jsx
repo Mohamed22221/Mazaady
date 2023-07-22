@@ -61,6 +61,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                     name={field.name}
                     formHandler={form}
                     loading={allCats.isLoading}
+                    placeholder="select main categorys "
                   >
                     {dataCategories?.map((option) => {
                       return (
@@ -86,7 +87,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                     {" "}
                     Sub Category <span className="text-red-500">*</span>
                   </label>
-                  <SelectSearch name={field.name} formHandler={form}>
+                  <SelectSearch name={field.name} formHandler={form} placeholder="select sub categorys ">
                     {formik.values.categorys != "" &&
                       dataCategories
                         .filter(
@@ -122,6 +123,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                       name={field.name}
                       formHandler={form}
                       loading={properties.isLoading}
+                      placeholder="select process type "
                     >
                       {dataProperties?.map((item) => {
                         return (
@@ -149,6 +151,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                 type="text"
                 name="other"
                 className="w-[92%] border-[1px] rounded-[5px] py-1 px-3 border-borderColor text-grayBoldColor "
+                placeholder="write other type"
               />
             </div>
           )}
@@ -178,6 +181,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                       name={field.name}
                       formHandler={form}
                       loading={dataProperties.isLoading}
+                      placeholder="select type "
                     >
                       {filterType?.options.map((item) => {
                         return (
@@ -208,7 +212,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                           <label className="font-semibold text-grayBoldColor ">
                             {item?.name}
                           </label>
-                          <SelectSearch name={field.name} formHandler={form}>
+                          <SelectSearch name={field.name} formHandler={form}      placeholder="select more option ">
                             {item?.options?.flat(2)?.map((details) => {
                               return (
                                 <Option key={details.id} value={details.id}>

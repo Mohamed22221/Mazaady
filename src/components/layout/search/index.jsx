@@ -3,7 +3,10 @@ import SelectSearch from "./selectSearch";
 import logo from "../../../assets/logo.png";
 import Image from "next/image";
 import DrobdownButton from "@/components/shared/drobdown";
+import { useRouter } from "next/router";
 const TopSearch = () => {
+  const router = useRouter()
+
   const items = [
     {
       label: "مزاد مباشر",
@@ -36,8 +39,8 @@ const TopSearch = () => {
         <DrobdownButton items={items} mainClass="main-select-search" />
         <SelectSearch />
       </div>
-      <div>
-        <Image src={logo} alt="logo" className="mx-md:w-[70px]" />
+      <div onClick={() => router.push('/')}>
+        <Image src={logo} alt="logo" className="mx-md:w-[70px] cursor-pointer" />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import notificationsIcon from "../../../assets/icon-notifications.png";
 import favoriteIcon from "../../../assets/icon-favorite.png";
 import DrobdownButton from "@/components/shared/drobdown";
 import { MenuFoldOutlined } from "@ant-design/icons";
-
+import Link from 'next/link'
 function Navbar() {
   const [links, setLinks] = useState([
     {
@@ -53,12 +53,12 @@ function Navbar() {
           <ul className="mx-5 md:flex md:items-center md:gap-[50px]">
             {links.map((item , index) => (
               <li key={index} className="max-md:my-3">
-                <a
+                <Link
                   href={`${item.link}`}
                   className={`${item.link}  text-white`}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
