@@ -103,8 +103,8 @@ const TabelSearch = ({ dataForm, allCats }) => {
     useTable({ columns, data });
 
   return (
-    <div className="App">
-      <div className="container">
+    <div dir="ltr" lang="en" className=" wrapper-style container mx-auto my-5 px-3 py-5 shadow-box rounded-[5px] ">
+      <div className="responsive">
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (

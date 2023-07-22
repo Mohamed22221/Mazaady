@@ -1,10 +1,12 @@
 import React from "react";
 import { Select } from "antd";
+import Spinner from "./spinner";
 
-const SelectSearch = ({name , children , formHandler}) => {
+const SelectSearch = ({name , children , formHandler , loading}) => {
     
   return (
     <div>
+      
       <Select
         showSearch
         optionFilterProp="children"
@@ -16,9 +18,11 @@ const SelectSearch = ({name , children , formHandler}) => {
         filterOption={(input, option) =>
           (option?.children ?? "").includes(input)
         }
+        className="w-[80%]"
       >
         {children}
       </Select>
+     {loading && <Spinner />}
     </div>
   );
 };

@@ -18,7 +18,9 @@ module.exports = {
         grayColor : "#707070",
         whiteColor : "#FFFFFF",
         moveColor : "#44215D",
+        borderColor : "#d9d9d9",
         bgTransbarent : "#1D1D1D "
+
       }
     },
   },

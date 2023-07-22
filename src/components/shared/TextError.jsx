@@ -2,7 +2,7 @@ import React from 'react'
 
 const TextError = (props) => {
   return (
-    <div className='error'>{props.children}</div>
+    <div className='error text-red-500'>{props.children}</div>
   )
 }
 

@@ -10,6 +10,7 @@ import {
 //shared components
 import TextError from "../shared/TextError";
 import SelectSearch from "../shared/SelectSearch";
+import Spinner from "../shared/spinner";
 
 const FormSearch = ({ allCats, setDataForm }) => {
   const { Option } = Select;
@@ -29,8 +30,8 @@ const FormSearch = ({ allCats, setDataForm }) => {
   };
   //handel validation error
   const validationSchema = object().shape({
-    categorys: string().required("required"),
-    sub_category: string().required("required"),
+    categorys: string().required("The categorys field is required "),
+    sub_category: string().required("The sub categorys field is required "),
   });
 
   return (
@@ -38,18 +39,29 @@ const FormSearch = ({ allCats, setDataForm }) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      dir="ltr"
     >
       {(formik) => (
-        <Form className="wrapper-style">
-          <h3>Search By :</h3>
-          <Field name="categorys" as="select">
+        <Form
+          dir="ltr"
+          lang="en" 
+          className="wrapper-style container mx-auto my-5 px-3 py-5 shadow-box rounded-[5px] border-t-[15px] border-mainColor "
+        >
+          <h3 className="text-[30px] my-2 font-bold">Search by Category </h3>
+          <Field name="categorys" as="select" className="!w-[80px]">
             {(props) => {
               const { field, form } = props;
               const dataCategories = allCats?.data?.data?.categories;
               return (
                 <div>
-                  <label>Main Category</label>
-                  <SelectSearch name={field.name} formHandler={form}>
+                  <label className="font-semibold mt-1 text-grayBoldColor ">
+                    Main Category<span className="text-red-500">* </span>
+                  </label>
+                  <SelectSearch
+                    name={field.name}
+                    formHandler={form}
+                    loading={allCats.isLoading}
+                  >
                     {dataCategories?.map((option) => {
                       return (
                         <Option key={option.id} value={option.id}>
@@ -70,7 +82,10 @@ const FormSearch = ({ allCats, setDataForm }) => {
               const dataCategories = allCats?.data?.data?.categories;
               return (
                 <div>
-                  <label> Sub Category</label>
+                  <label className="font-semibold mt-1 text-grayBoldColor ">
+                    {" "}
+                    Sub Category <span className="text-red-500">*</span>
+                  </label>
                   <SelectSearch name={field.name} formHandler={form}>
                     {formik.values.categorys != "" &&
                       dataCategories
@@ -100,8 +115,14 @@ const FormSearch = ({ allCats, setDataForm }) => {
                 const dataProperties = properties?.data?.data;
                 return (
                   <div>
-                    <label>process type </label>
-                    <SelectSearch name={field.name} formHandler={form}>
+                    <label className="font-semibold mt-1 text-grayBoldColor ">
+                      process type{" "}
+                    </label>
+                    <SelectSearch
+                      name={field.name}
+                      formHandler={form}
+                      loading={properties.isLoading}
+                    >
                       {dataProperties?.map((item) => {
                         return (
                           <Option key={item.id} value={item.id}>
@@ -120,9 +141,15 @@ const FormSearch = ({ allCats, setDataForm }) => {
           )}
           {/*other inbut */}
           {formik.values.properties === "other" && (
-            <div className="form-control">
-              <label>Other</label>
-              <Field type="text" name="other" />
+            <div className="flex flex-col">
+              <label className="font-semibold text-grayBoldColor mt-1 ">
+                Other
+              </label>
+              <Field
+                type="text"
+                name="other"
+                className="w-[92%] border-[1px] rounded-[5px] py-1 px-3 border-borderColor text-grayBoldColor "
+              />
             </div>
           )}
           {/*obtions select */}
@@ -143,8 +170,15 @@ const FormSearch = ({ allCats, setDataForm }) => {
 
                 return (
                   <div>
-                    <label>{filterType?.name}</label>
-                    <SelectSearch name={field.name} formHandler={form}>
+                    <label className="font-semibold text-grayBoldColor mt-1">
+                      {filterType?.name}
+                    </label>
+
+                    <SelectSearch
+                      name={field.name}
+                      formHandler={form}
+                      loading={dataProperties.isLoading}
+                    >
                       {filterType?.options.map((item) => {
                         return (
                           <Option key={item.id} value={item.id}>
@@ -168,12 +202,14 @@ const FormSearch = ({ allCats, setDataForm }) => {
                 const getOption = dataOptions?.data?.data;
                 return (
                   <>
-                    {getOption?.map((item, index) => {
+                    {getOption?.map((item) => {
                       return (
                         <div key={item.id}>
-                          <label>{item?.name}</label>
+                          <label className="font-semibold text-grayBoldColor ">
+                            {item?.name}
+                          </label>
                           <SelectSearch name={field.name} formHandler={form}>
-                            {item?.options?.map((details) => {
+                            {item?.options?.flat(2)?.map((details) => {
                               return (
                                 <Option key={details.id} value={details.id}>
                                   {details.name}
@@ -189,7 +225,10 @@ const FormSearch = ({ allCats, setDataForm }) => {
               }}
             </Field>
           )}
-          <button type="submit">search</button>
+
+          <button className="py-1 px-6 backy text-white my-3" type="submit">
+            search
+          </button>
         </Form>
       )}
     </Formik>

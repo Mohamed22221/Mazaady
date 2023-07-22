@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import "../component/drobdown.css";
+@import "../component/search.css";
+
 @import "./class.css";
 
 body {

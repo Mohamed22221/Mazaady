@@ -1,0 +1,56 @@
+.ant-select-show-search {
+  width: 92% !important;
+  margin-top: 7px;
+}
+.ant-select-open {
+  width: 92% !important;
+  margin-block: 7px;
+}
+.ant-select-arrow {
+  align-items: end;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.75em;
+}
+
+table tr {
+  background-color: #d206541e;
+  border: 1px solid #ddd;
+  padding: 0.35em;
+  color:#44215D;
+}
+
+table th,
+table td {
+  padding: 0.625em;
+  text-align: center;
+}
+
+table th {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  .responsive {
+    overflow-x: scroll;
+  }
+  table {
+    width: 900px;
+  }
+}
