@@ -10,9 +10,13 @@ import {
 //shared components
 import TextError from "../shared/TextError";
 import SelectSearch from "../shared/SelectSearch";
-import Spinner from "../shared/spinner";
 
 const FormSearch = ({ allCats, setDataForm }) => {
+  const [idProperties, seiIdProperties] = useState(0);
+  const [idOptionsRTk, setIdOptionsRTK] = useState(0);
+  //RTK Cats Query
+  const properties = useGetPropertiesCatsQuery(idProperties);
+  const dataOptions = useGetOptionsCatsQuery(idOptionsRTk);
   const { Option } = Select;
   //start values filter search
   const initialValues = {
@@ -44,7 +48,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
       {(formik) => (
         <Form
           dir="ltr"
-          lang="en" 
+          lang="en"
           className="wrapper-style container mx-auto my-5 px-3 py-5 shadow-box rounded-[5px] border-t-[15px] border-mainColor "
         >
           <h3 className="text-[30px] my-2 font-bold">Search by Category </h3>
@@ -87,7 +91,11 @@ const FormSearch = ({ allCats, setDataForm }) => {
                     {" "}
                     Sub Category <span className="text-red-500">*</span>
                   </label>
-                  <SelectSearch name={field.name} formHandler={form} placeholder="select sub categorys ">
+                  <SelectSearch
+                    name={field.name}
+                    formHandler={form}
+                    placeholder="select sub categorys "
+                  >
                     {formik.values.categorys != "" &&
                       dataCategories
                         .filter(
@@ -112,7 +120,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
               {(props) => {
                 const { field, form } = props;
                 const idSubCategory = formik.values.sub_category;
-                const properties = useGetPropertiesCatsQuery(idSubCategory);
+                seiIdProperties(idSubCategory);
                 const dataProperties = properties?.data?.data;
                 return (
                   <div>
@@ -165,8 +173,8 @@ const FormSearch = ({ allCats, setDataForm }) => {
               {(props) => {
                 const { field, form } = props;
                 const idSubCategory = formik.values.sub_category;
-                const dataProperties = useGetPropertiesCatsQuery(idSubCategory);
-                const getType = dataProperties?.data?.data;
+                seiIdProperties(idSubCategory);
+                const getType = properties?.data?.data;
                 const filterType = getType?.filter(
                   (item) => item.id === formik.values.properties
                 )[0];
@@ -180,7 +188,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
                     <SelectSearch
                       name={field.name}
                       formHandler={form}
-                      loading={dataProperties.isLoading}
+                      loading={properties.isLoading}
                       placeholder="select type "
                     >
                       {filterType?.options.map((item) => {
@@ -202,7 +210,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
               {(props) => {
                 const { form, field } = props;
                 const idOptions = formik.values.type;
-                const dataOptions = useGetOptionsCatsQuery(idOptions);
+                setIdOptionsRTK(idOptions);
                 const getOption = dataOptions?.data?.data;
                 return (
                   <>
@@ -212,7 +220,11 @@ const FormSearch = ({ allCats, setDataForm }) => {
                           <label className="font-semibold text-grayBoldColor ">
                             {item?.name}
                           </label>
-                          <SelectSearch name={field.name} formHandler={form}      placeholder="select more option ">
+                          <SelectSearch
+                            name={field.name}
+                            formHandler={form}
+                            placeholder="select more option "
+                          >
                             {item?.options?.flat(2)?.map((details) => {
                               return (
                                 <Option key={details.id} value={details.id}>

@@ -108,9 +108,9 @@ const TabelSearch = ({ dataForm, allCats }) => {
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
+              <tr key={headerGroup.getHeaderGroupProps()} {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>
+                  <th {...column.getHeaderProps()} key={column.getHeaderProps()}>
                     {column.render("Header")}
                   </th>
                 ))}
@@ -121,9 +121,9 @@ const TabelSearch = ({ dataForm, allCats }) => {
             {rows.map((row) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr key={row.getRowProps()} {...row.getRowProps()}>
                   {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()}> {cell.render("Cell")} </td>
+                    <td key={cell.getCellProps()} {...cell.getCellProps()}> {cell.render("Cell")} </td>
                   ))}
                 </tr>
               );

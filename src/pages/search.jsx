@@ -3,7 +3,7 @@ import FormSearch from "@/components/search/formSearch";
 import TabelSearch from "@/components/search/tabelSearch";
 import React, { useState } from "react";
 
-const search = () => {
+const Search = () => {
   const allCats = useGetAllCatsQuery();
   const [dataForm, setDataForm] = useState({});
   return (
@@ -16,4 +16,4 @@ const search = () => {
   );
 };
 
-export default search;
+export default Search;
