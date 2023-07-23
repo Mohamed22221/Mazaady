@@ -85,7 +85,7 @@ const TabelSearch = ({ dataForm, allCats }) => {
             console.log(getOption , "valuevalue")
             return cellProps.cell.value === ""
               ? "no option"
-              : value?.map((item) => item.name)[0];
+              : value?.map((item) => item.name);
           },
         },
         {
