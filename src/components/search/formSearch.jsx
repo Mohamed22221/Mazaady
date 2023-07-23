@@ -227,9 +227,10 @@ const FormSearch = ({ allCats, setDataForm }) => {
                             {option.map((_, index) => {
                               return (
                                 <SelectSearch
+                                  key={index}
                                   name={`option[${index}]`}
                                   formHandler={form}
-                                  placeholder="select more option "
+                                  placeholder="select more options "
                                   loading={dataOptions.isLoading}
                                 >
                                   {item?.options?.flat(2)?.map((details) => {
