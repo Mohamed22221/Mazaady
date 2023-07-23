@@ -25,7 +25,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
     properties: "",
     other: "",
     type: "",
-    option: ["24759", ""],
+    option: [""],
   };
   //handel filter search
   const onSubmit = (data, actions) => {
@@ -46,7 +46,6 @@ const FormSearch = ({ allCats, setDataForm }) => {
       dir="ltr"
     >
       {(formik) => (
-        console.log(formik),
         (
           <Form
             dir="ltr"

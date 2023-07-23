@@ -77,13 +77,12 @@ const TabelSearch = ({ dataForm, allCats }) => {
             const idOptions = cellProps.data[0].type;
             const dataOptions = useGetOptionsCatsQuery(idOptions);
             const getOption = dataOptions?.data?.data;
-           
             const value = handelFilter(
               getOption?.map((item) => item.options).flat(2),
               ...cellProps.cell.value
             );
-            console.log(getOption , "valuevalue")
-            return cellProps.cell.value === ""
+
+            return cellProps.cell.value[0] === ""
               ? "no option"
               : value?.map((item) => item.name);
           },
@@ -92,7 +91,7 @@ const TabelSearch = ({ dataForm, allCats }) => {
           Header: "Other",
           accessor: "other",
           Cell: (cellProps) => {
-            return cellProps.cell.value === ""
+            return cellProps.cell.value
               ? "No Other"
               : cellProps.cell.value;
           },
