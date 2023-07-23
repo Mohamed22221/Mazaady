@@ -46,6 +46,7 @@ const FormSearch = ({ allCats, setDataForm }) => {
       dir="ltr"
     >
       {(formik) => (
+      
         (
           <Form
             dir="ltr"
