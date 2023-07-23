@@ -77,10 +77,12 @@ const TabelSearch = ({ dataForm, allCats }) => {
             const idOptions = cellProps.data[0].type;
             const dataOptions = useGetOptionsCatsQuery(idOptions);
             const getOption = dataOptions?.data?.data;
+           
             const value = handelFilter(
               getOption?.map((item) => item.options).flat(2),
-              cellProps.cell.value
+              ...cellProps.cell.value
             );
+            console.log(getOption , "valuevalue")
             return cellProps.cell.value === ""
               ? "no option"
               : value?.map((item) => item.name)[0];
