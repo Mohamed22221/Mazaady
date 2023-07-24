@@ -26,14 +26,18 @@ table caption {
   font-size: 1.5em;
   margin: 0.5em 0 0.75em;
 }
-
+.responsive {
+  overflow-x: auto;
+}
 table tr {
   background-color: #d206541e;
   border: 1px solid #ddd;
   padding: 0.35em;
   color:#44215D;
 }
-
+table {
+  width: 1500px;
+}
 table th,
 table td {
   padding: 0.625em;
@@ -50,7 +54,5 @@ table th {
   .responsive {
     overflow-x: scroll;
   }
-  table {
-    width: 900px;
-  }
+
 }

@@ -1,6 +1,6 @@
 import { useGetAllCatsQuery } from "@/api/services/packagesApi";
-import FormSearch from "@/components/search/formSearch";
-import TabelSearch from "@/components/search/tabelSearch";
+import BuildSearch from "@/components/search/buildSearch";
+import BuildTabel from "@/components/search/buildTabel";
 import React, { useState } from "react";
 
 const Search = () => {
@@ -8,9 +8,9 @@ const Search = () => {
   const [dataForm, setDataForm] = useState({});
   return (
     <div>
-      <FormSearch allCats={allCats} setDataForm={setDataForm} />
+      <BuildSearch allCats={allCats} setDataForm={setDataForm} />
       {Object.keys(dataForm).length > 0 && (
-        <TabelSearch dataForm={dataForm} allCats={allCats?.data} />
+        <BuildTabel dataForm={dataForm} allCats={allCats?.data} />
       )}
     </div>
   );

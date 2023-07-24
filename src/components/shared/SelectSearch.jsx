@@ -8,14 +8,19 @@ const SelectSearch = ({
   formHandler,
   placeholder,
   loading,
+  onChange,
+  
 }) => {
+  const handelChange = (name,value) =>{
+    formHandler.setFieldValue(name, value)
+  }
   return (
     <div>
       <Select
         showSearch
         optionFilterProp="children"
         name={name}
-        onChange={(value) => formHandler.setFieldValue(name, value)}
+        onChange={(value) => onChange? onChange(name,value) : handelChange(name, value)}
         onBlur={() => formHandler.setFieldTouched(name, true)}
         value={formHandler.values[name] ? formHandler.values[name] : undefined}
         style={{ width: 200 }}
@@ -25,8 +30,10 @@ const SelectSearch = ({
         className="w-[80%]"
         placeholder={placeholder}
       >
+        
         {children}
       </Select>
+      
       {loading && <Spinner />}
     </div>
   );
