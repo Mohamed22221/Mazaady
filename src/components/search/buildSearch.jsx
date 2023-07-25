@@ -15,6 +15,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
   const [newValues, setNewValues] = useState([]);
   const [otherValue, setOtherValue] = useState("");
   const [indexArray, setIndexArray] = useState([]);
+
   //RTK Cats Query
   const [idProperties, seiIdProperties] = useState(0);
   const [idOptionsRTk, setIdOptionsRTK] = useState(0);
@@ -27,6 +28,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
     sub_category: "",
     items: {},
   };
+
   //handel filter search
   const onSubmit = (data, actions) => {
     setDataForm(data);
@@ -38,6 +40,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
       },
     });
   };
+
   //handel validation error
   const validationSchema = object().shape({
     categorys: string().required("The categorys field is required "),
@@ -48,6 +51,13 @@ const BuildSearch = ({ allCats, setDataForm }) => {
     () => setNewValues((oldArray) => [...oldArray, dataOptions?.data?.data]),
     [dataOptions?.data?.data]
   );
+  // Creates an array of objects with unique "name" property values.
+
+  let uniqueObjArray = [
+    ...new Map(
+      newValues.flat(2).map((item) => [item?.["name"], item])
+    ).values(),
+  ];
   return (
     <Formik
       initialValues={initialValues}
@@ -66,7 +76,6 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             {(props) => {
               const { field, form } = props;
               const dataCategories = allCats?.data?.data?.categories;
-              console.log(formik.values);
               return (
                 <div>
                   <label className="font-semibold mt-1 text-grayBoldColor ">
@@ -151,9 +160,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                   formik.values.sub_category?.split("ID:")[1];
                 seiIdProperties(idSubCategory);
                 const dataProperties = properties?.data?.data;
-                console.log(formik);
                 const handelChange = (name, value) => {
-                  console.log(name);
                   //switch to other faild
                   if (value === "other") {
                     setIndexArray([...indexArray, name]);
@@ -171,7 +178,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
 
                 return (
                   <div>
-                    {dataProperties?.map((item) => {
+                    {dataProperties?.map((item, i, arr) => {
                       return (
                         <div key={item.id}>
                           <label className="font-semibold mt-1 text-grayBoldColor ">
@@ -220,46 +227,52 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             </Field>
           )}
           {/*more options */}
-          {formik.values.sub_category != "" && Object.keys(formik.values.items).length != 0  && (
-            <Field name={`items.${otherValue}`} as="select">
-              {(props) => {
-                const { form } = props;
-                return (
-                  <div>
-                    {newValues
-                      .flat(3)
-                      .slice(1)
-                      ?.map((item) => {
-                        return (
-                          <div key={item?.id}>
-                            <label className="font-semibold mt-1 text-grayBoldColor ">
-                              {item?.name}
-                            </label>
-                            <SelectSearch
-                              name={`items.${item.name}`}
-                              formHandler={form}
-                              loading={dataOptions?.isLoading}
-                              placeholder={`select ${item?.name} type `}
-                            >
-                              {item?.options?.map((data) => {
-                                return (
-                                  <Option
-                                    key={data?.id}
-                                    value={data?.name + "ID:" + data?.id}
-                                  >
-                                    {data?.name}
-                                  </Option>
-                                );
-                              })}
-                            </SelectSearch>
-                          </div>
-                        );
-                      })}
-                  </div>
-                );
-              }}
-            </Field>
-          )}
+          {formik.values.sub_category != "" &&
+            Object.keys(formik.values.items).length != 0 && (
+              <Field name={`items.${otherValue}`} as="select">
+                {(props) => {
+                  const { form } = props;
+                  return (
+                    <div>
+                      {uniqueObjArray
+                        .flat(3)
+                        .slice(1)
+                        ?.map((item) => {
+                          const handelChange = (name, value) => {
+                            form.setFieldValue(name, value);
+                          };
+                          return (
+                            <div key={item?.id}>
+                              <label className="font-semibold mt-1 text-grayBoldColor ">
+                                {item?.name}
+                              </label>
+                              <SelectSearch
+                                name={`items.${item.name}`}
+                                formHandler={form}
+                                loading={dataOptions?.isLoading}
+                                placeholder={`select ${item?.name} type `}
+                                onChange={handelChange}
+                              >
+                                {item?.options?.map((data) => {
+                                  console.log(data?.options, "datadata");
+                                  return (
+                                    <Option
+                                      key={data?.id}
+                                      value={data?.name + "ID:" + data?.id}
+                                    >
+                                      {data?.name}
+                                    </Option>
+                                  );
+                                })}
+                              </SelectSearch>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  );
+                }}
+              </Field>
+            )}
 
           <button className="py-1 px-6 backy text-white my-3" type="submit">
             search

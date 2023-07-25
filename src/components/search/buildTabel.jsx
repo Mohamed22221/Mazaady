@@ -12,8 +12,6 @@ const BuildTabel = ({ dataForm }) => {
               accessor: keyItems.split("ID:")[0],
               value: valItems,
               Cell: (cellProps) => {
-                console.log(cellProps.cell.column.value);
-
                 return cellProps.cell.column.value.split("ID:")[0];
               },
             },
@@ -26,7 +24,6 @@ const BuildTabel = ({ dataForm }) => {
             accessor: key.split("ID:")[0],
             value: value,
             Cell: (cellProps) => {
-              console.log(cellProps.cell.value);
               return cellProps.cell.value.split("ID:")[0];
             },
           },
