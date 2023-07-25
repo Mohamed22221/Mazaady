@@ -25,11 +25,18 @@ const BuildSearch = ({ allCats, setDataForm }) => {
   const initialValues = {
     categorys: "",
     sub_category: "",
+    items: {},
   };
   //handel filter search
   const onSubmit = (data, actions) => {
     setDataForm(data);
-    actions.resetForm({ data: "" });
+    actions.resetForm({
+      values: {
+        categorys: "",
+        sub_category: "",
+        items: {},
+      },
+    });
   };
   //handel validation error
   const validationSchema = object().shape({
@@ -59,7 +66,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             {(props) => {
               const { field, form } = props;
               const dataCategories = allCats?.data?.data?.categories;
-
+              console.log(formik.values);
               return (
                 <div>
                   <label className="font-semibold mt-1 text-grayBoldColor ">
@@ -92,7 +99,18 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             {(props) => {
               const { field, form } = props;
               const dataCategories = allCats?.data?.data?.categories;
-              const catId = formik.values.categorys.split("ID:")[1];
+              const catId = formik.values.categorys?.split("ID:")[1];
+              const handelChange = (name, value) => {
+                form.setFieldValue(name, value);
+                form.resetForm({
+                  values: {
+                    categorys: formik.values.categorys,
+                    sub_category: value,
+                    items: {},
+                  },
+                });
+              };
+
               return (
                 <div>
                   <label className="font-semibold mt-1 text-grayBoldColor ">
@@ -103,6 +121,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                     name={field.name}
                     formHandler={form}
                     placeholder="select sub categorys "
+                    onChange={handelChange}
                   >
                     {formik.values.categorys != "" &&
                       dataCategories
@@ -124,16 +143,17 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             }}
           </Field>
           {/*sub properties */}
-          {formik.values.sub_category != "" && (
-            <Field name={otherValue} as="select">
+          {formik.values.sub_category !== "" && (
+            <Field name={`items.${otherValue}`} as="select">
               {(props) => {
                 const { form } = props;
                 const idSubCategory =
-                  formik.values.sub_category.split("ID:")[1];
+                  formik.values.sub_category?.split("ID:")[1];
                 seiIdProperties(idSubCategory);
                 const dataProperties = properties?.data?.data;
-
+                console.log(formik);
                 const handelChange = (name, value) => {
+                  console.log(name);
                   //switch to other faild
                   if (value === "other") {
                     setIndexArray([...indexArray, name]);
@@ -158,7 +178,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                             {item?.name}
                           </label>
                           <SelectSearch
-                            name={item.name}
+                            name={`items.${item.name}`}
                             formHandler={form}
                             loading={properties.isLoading}
                             placeholder={`select ${item?.name} type `}
@@ -178,14 +198,14 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                               other
                             </Option>
                           </SelectSearch>
-                          {indexArray.includes(item.name) && (
+                          {indexArray.includes(`items.${item.name}`) && (
                             <div className="flex flex-col">
                               <label className="font-semibold text-grayBoldColor mt-1 ">
                                 Other {item.name}
                               </label>
                               <Field
                                 type="text"
-                                name={"other " + item.name}
+                                name={`items.${"other " + item.name}`}
                                 className="w-[92%] border-[1px] rounded-[5px] py-1 px-3 border-borderColor text-grayBoldColor "
                                 placeholder="write other type"
                               />
@@ -200,8 +220,8 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             </Field>
           )}
           {/*more options */}
-          {formik.values.sub_category != "" && (
-            <Field as="select">
+          {formik.values.sub_category != "" && Object.keys(formik.values.items).length != 0  && (
+            <Field name={`items.${otherValue}`} as="select">
               {(props) => {
                 const { form } = props;
                 return (
@@ -216,7 +236,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                               {item?.name}
                             </label>
                             <SelectSearch
-                              name={item?.name}
+                              name={`items.${item.name}`}
                               formHandler={form}
                               loading={dataOptions?.isLoading}
                               placeholder={`select ${item?.name} type `}

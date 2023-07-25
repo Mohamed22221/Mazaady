@@ -2,21 +2,43 @@ import React from "react";
 import { useTable } from "react-table";
 
 const BuildTabel = ({ dataForm }) => {
-  const columnsForm = Object.entries(dataForm)
-    .map(([key, value]) => [
-      {
-        Header: key.split("ID:")[0],
-        accessor: key.split("ID:")[0],
-        value: value,
-        Cell: (cellProps) => {
-          return cellProps.cell.value.split("ID:")[0];
-        },
-      },
-    ])
+  const columnsForms = Object.entries(dataForm)
+    .map(([key, value], i) => {
+      if (i === 2) {
+        return Object.entries(value).map(([keyItems, valItems]) => {
+          return [
+            {
+              Header: keyItems.split("ID:")[0],
+              accessor: keyItems.split("ID:")[0],
+              value: valItems,
+              Cell: (cellProps) => {
+                console.log(cellProps.cell.column.value);
+
+                return cellProps.cell.column.value.split("ID:")[0];
+              },
+            },
+          ];
+        });
+      } else {
+        return [
+          {
+            Header: key.split("ID:")[0],
+            accessor: key.split("ID:")[0],
+            value: value,
+            Cell: (cellProps) => {
+              console.log(cellProps.cell.value);
+              return cellProps.cell.value.split("ID:")[0];
+            },
+          },
+        ];
+      }
+    })
     .flat(2)
-    .filter((item) => item.value !== "other");
+    .filter((item) => item.value != "other");
+
+  console.log(columnsForms.flat(2));
   const data = React.useMemo(() => [dataForm], [dataForm]);
-  const columns = React.useMemo(() => columnsForm, [dataForm]);
+  const columns = React.useMemo(() => columnsForms, [dataForm]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
