@@ -1,18 +1,20 @@
 import React from "react";
 import { useTable } from "react-table";
+//shared components
+import { splitData } from "../shared/split";
 
 const BuildTabel = ({ dataForm }) => {
   const columnsForms = Object.entries(dataForm)
-    .map(([key, value], i) => {
-      if (i === 2) {
+    .map(([key, value]) => {
+      if (key === "items") {
         return Object.entries(value).map(([keyItems, valItems]) => {
           return [
             {
-              Header: keyItems.split("ID:")[0],
-              accessor: keyItems.split("ID:")[0],
+              Header: splitData(keyItems, 0),
+              accessor: splitData(keyItems, 0),
               value: valItems,
               Cell: (cellProps) => {
-                return cellProps.cell.column.value.split("ID:")[0];
+                return splitData(cellProps.cell.column.value, 0);
               },
             },
           ];
@@ -20,11 +22,11 @@ const BuildTabel = ({ dataForm }) => {
       } else {
         return [
           {
-            Header: key.split("ID:")[0],
-            accessor: key.split("ID:")[0],
+            Header: splitData(key, 0),
+            accessor: splitData(key, 0),
             value: value,
             Cell: (cellProps) => {
-              return cellProps.cell.value.split("ID:")[0];
+              return splitData(cellProps.cell.value, 0);
             },
           },
         ];
@@ -32,8 +34,6 @@ const BuildTabel = ({ dataForm }) => {
     })
     .flat(2)
     .filter((item) => item.value != "other");
-
-  console.log(columnsForms.flat(2));
   const data = React.useMemo(() => [dataForm], [dataForm]);
   const columns = React.useMemo(() => columnsForms, [dataForm]);
 

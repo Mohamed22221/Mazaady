@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Space } from "antd";
 
 const DrobdownButton = ({ items , mainClass }) => {

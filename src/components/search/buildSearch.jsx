@@ -10,11 +10,14 @@ import {
 //shared components
 import TextError from "../shared/TextError";
 import SelectSearch from "../shared/SelectSearch";
+import Requierd from "../shared/requierd";
+import { splitData } from "../shared/split";
 
 const BuildSearch = ({ allCats, setDataForm }) => {
   const [newValues, setNewValues] = useState([]);
   const [otherValue, setOtherValue] = useState("");
   const [indexArray, setIndexArray] = useState([]);
+  const [moreOptions, setMoreOptions] = useState([]);
 
   //RTK Cats Query
   const [idProperties, seiIdProperties] = useState(0);
@@ -28,10 +31,10 @@ const BuildSearch = ({ allCats, setDataForm }) => {
     sub_category: "",
     items: {},
   };
-
   //handel filter search
   const onSubmit = (data, actions) => {
     setDataForm(data);
+    setMoreOptions([]);
     actions.resetForm({
       values: {
         categorys: "",
@@ -40,24 +43,23 @@ const BuildSearch = ({ allCats, setDataForm }) => {
       },
     });
   };
-
   //handel validation error
   const validationSchema = object().shape({
     categorys: string().required("The categorys field is required "),
     sub_category: string().required("The sub categorys field is required "),
   });
   //render new data to generate inbput
-  useMemo(
-    () => setNewValues((oldArray) => [...oldArray, dataOptions?.data?.data]),
-    [dataOptions?.data?.data]
-  );
-  // Creates an array of objects with unique "name" property values.
+  useEffect(() => {
+    setNewValues((oldArray) => [...oldArray, dataOptions?.data?.data]);
+  }, [dataOptions?.data?.data]);
 
+  // Creates an array of objects with unique "name" property values.
   let uniqueObjArray = [
     ...new Map(
       newValues.flat(2).map((item) => [item?.["name"], item])
     ).values(),
-  ];
+  ].filter((item) => item != undefined);
+
   return (
     <Formik
       initialValues={initialValues}
@@ -79,7 +81,8 @@ const BuildSearch = ({ allCats, setDataForm }) => {
               return (
                 <div>
                   <label className="font-semibold mt-1 text-grayBoldColor ">
-                    Main Category<span className="text-red-500">* </span>
+                    Main Category
+                    <Requierd />
                   </label>
                   <SelectSearch
                     name={field.name}
@@ -108,7 +111,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             {(props) => {
               const { field, form } = props;
               const dataCategories = allCats?.data?.data?.categories;
-              const catId = formik.values.categorys?.split("ID:")[1];
+              const catId = splitData(formik.values.categorys, 1);
               const handelChange = (name, value) => {
                 form.setFieldValue(name, value);
                 form.resetForm({
@@ -118,13 +121,21 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                     items: {},
                   },
                 });
+                if (Object?.keys(formik.values.items).length > 0) {
+                  setNewValues(() => []);
+                } else {
+                  setNewValues((oldArray) => [
+                    ...oldArray,
+                    dataOptions?.data?.data,
+                  ]);
+                }
               };
 
               return (
                 <div>
                   <label className="font-semibold mt-1 text-grayBoldColor ">
                     {" "}
-                    Sub Category <span className="text-red-500">*</span>
+                    Sub Category <Requierd />
                   </label>
                   <SelectSearch
                     name={field.name}
@@ -156,8 +167,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
             <Field name={`items.${otherValue}`} as="select">
               {(props) => {
                 const { form } = props;
-                const idSubCategory =
-                  formik.values.sub_category?.split("ID:")[1];
+                const idSubCategory = splitData(formik.values.sub_category, 1);
                 seiIdProperties(idSubCategory);
                 const dataProperties = properties?.data?.data;
                 const handelChange = (name, value) => {
@@ -173,7 +183,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                   //get data options in (RTK)
                   setOtherValue(name);
                   form.setFieldValue(name, value);
-                  setIdOptionsRTK(+value.split("ID:")[1]);
+                  setIdOptionsRTK(+splitData(value, 1));
                 };
 
                 return (
@@ -234,45 +244,89 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                   const { form } = props;
                   return (
                     <div>
-                      {uniqueObjArray
-                        .flat(3)
-                        .slice(1)
-                        ?.map((item) => {
-                          const handelChange = (name, value) => {
-                            form.setFieldValue(name, value);
-                          };
-                          return (
-                            <div key={item?.id}>
-                              <label className="font-semibold mt-1 text-grayBoldColor ">
-                                {item?.name}
-                              </label>
-                              <SelectSearch
-                                name={`items.${item.name}`}
-                                formHandler={form}
-                                loading={dataOptions?.isLoading}
-                                placeholder={`select ${item?.name} type `}
-                                onChange={handelChange}
-                              >
-                                {item?.options?.map((data) => {
-                                  console.log(data?.options, "datadata");
-                                  return (
-                                    <Option
-                                      key={data?.id}
-                                      value={data?.name + "ID:" + data?.id}
-                                    >
-                                      {data?.name}
-                                    </Option>
-                                  );
-                                })}
-                              </SelectSearch>
-                            </div>
+                      {uniqueObjArray?.map((item, _, arr) => {
+                        const handelChange = (name, value) => {
+                          form.setFieldValue(name, value);
+                          const idValue = item?.options?.filter(
+                            (itemFilter) =>
+                              itemFilter.id === +splitData(value, 1)
                           );
-                        })}
+                          setMoreOptions((prev) => [...prev, ...idValue]);
+                        };
+                        return (
+                          <div key={item?.id}>
+                            <label className="font-semibold mt-1 text-grayBoldColor ">
+                              {item?.name}
+                            </label>
+                            <SelectSearch
+                              name={`items.${item.name}`}
+                              formHandler={form}
+                              loading={dataOptions?.isLoading}
+                              placeholder={`select ${item?.name} type `}
+                              onChange={handelChange}
+                            >
+                              {item?.options?.map((data) => {
+                                return (
+                                  <Option
+                                    key={data?.id}
+                                    value={data?.name + "ID:" + data?.id}
+                                  >
+                                    {data?.name}
+                                  </Option>
+                                );
+                              })}
+                            </SelectSearch>
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 }}
               </Field>
             )}
+          <Field name="categorys" as="select" className="!w-[80px]">
+            {(props) => {
+              const { form } = props;
+              const searchOptions = moreOptions.filter(
+                (item) => item?.options?.length > 0
+              );
+
+              return (
+                <div>
+                  {searchOptions?.map((item) => {
+                    const handelChange = (name, value) => {
+                      form.setFieldValue(name, value);
+                    };
+                    return (
+                      <div key={item?.id}>
+                        <label className="font-semibold mt-1 text-grayBoldColor ">
+                          {item?.name}
+                        </label>
+                        <SelectSearch
+                          name={`items.${item.name}`}
+                          formHandler={form}
+                          loading={dataOptions?.isLoading}
+                          placeholder={`select ${item?.name} type `}
+                          onChange={handelChange}
+                        >
+                          {item?.options?.map((data) => {
+                            return (
+                              <Option
+                                key={data?.id}
+                                value={data?.name + "ID:" + data?.id}
+                              >
+                                {data?.name}
+                              </Option>
+                            );
+                          })}
+                        </SelectSearch>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            }}
+          </Field>
 
           <button className="py-1 px-6 backy text-white my-3" type="submit">
             search
