@@ -32,9 +32,12 @@ const BuildSearch = ({ allCats, setDataForm }) => {
     items: {},
   };
   //handel filter search
+  console.log(newValues, "setNewValues");
+  console.log(newValues);
   const onSubmit = (data, actions) => {
     setDataForm(data);
     setMoreOptions([]);
+    setNewValues(() => []);
     actions.resetForm({
       values: {
         categorys: "",
@@ -114,6 +117,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
               const catId = splitData(formik.values.categorys, 1);
               const handelChange = (name, value) => {
                 form.setFieldValue(name, value);
+                //reset form
                 form.resetForm({
                   values: {
                     categorys: formik.values.categorys,
@@ -121,13 +125,9 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                     items: {},
                   },
                 });
+                //reset options
                 if (Object?.keys(formik.values.items).length > 0) {
                   setNewValues(() => []);
-                } else {
-                  setNewValues((oldArray) => [
-                    ...oldArray,
-                    dataOptions?.data?.data,
-                  ]);
                 }
               };
 
@@ -171,6 +171,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                 seiIdProperties(idSubCategory);
                 const dataProperties = properties?.data?.data;
                 const handelChange = (name, value) => {
+                  form.setFieldValue(name, value);
                   //switch to other faild
                   if (value === "other") {
                     setIndexArray([...indexArray, name]);
@@ -182,13 +183,12 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                   }
                   //get data options in (RTK)
                   setOtherValue(name);
-                  form.setFieldValue(name, value);
                   setIdOptionsRTK(+splitData(value, 1));
                 };
 
                 return (
                   <div>
-                    {dataProperties?.map((item, i, arr) => {
+                    {dataProperties?.map((item) => {
                       return (
                         <div key={item.id}>
                           <label className="font-semibold mt-1 text-grayBoldColor ">
@@ -244,7 +244,7 @@ const BuildSearch = ({ allCats, setDataForm }) => {
                   const { form } = props;
                   return (
                     <div>
-                      {uniqueObjArray?.map((item, _, arr) => {
+                      {uniqueObjArray?.map((item) => {
                         const handelChange = (name, value) => {
                           form.setFieldValue(name, value);
                           const idValue = item?.options?.filter(
@@ -327,7 +327,6 @@ const BuildSearch = ({ allCats, setDataForm }) => {
               );
             }}
           </Field>
-
           <button className="py-1 px-6 backy text-white my-3" type="submit">
             search
           </button>
